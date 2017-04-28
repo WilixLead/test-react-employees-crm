@@ -1,0 +1,33 @@
+.department-list {
+  padding-right: 10%;
+}
+.department-item-input {
+  width:80%;
+  float: left;
+}
+.department-item-raw {
+  width: 100%;
+}
+.delete-department-button {
+  display: inline-block;
+  float: right;
+  cursor: pointer;
+}
+.department-item-name {
+  display: inline-block;
+}
+.department-list form{
+  display: flex;
+  justify-content: space-between;
+  margin: 40px 0 40px;
+}
+
+
+.department-list label{
+  margin-right: 100px;
+}
+
+.department-list input{
+  width: 500px;
+  margin-right: 100px;
+}
