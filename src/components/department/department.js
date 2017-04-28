@@ -6,7 +6,6 @@ import {addDepartment, getDepartment, deleteDepartment, updateDepartment} from '
 import "./department.scss";
 
 class Department extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -16,7 +15,6 @@ class Department extends Component {
   }
 
   componentDidMount() {
-    console.log('department', this.props.departments);
     this.props.onGetDepartment();
   }
 
@@ -27,13 +25,11 @@ class Department extends Component {
   }
 
   handleDeleteDepartmentClick(departmentId) {
-    //console.log("department ID is", departmentId);
     this.props.onDeleteDepartment(departmentId);
   }
 
   toggleElement(department) {
     this.setState({inputValue: department.name, editMode: department.id});
-    console.log("this", department);
   }
 
   handleChange(e) {
@@ -41,22 +37,21 @@ class Department extends Component {
   }
 
   handleUpdateDepartmentClick(departmentId) {
-    console.log("departmentID", departmentId);
-    console.log("departmentName", this.state.inputValue);
     this.props.onUpdateDepartment(departmentId, this.state.inputValue);
     this.setState({editMode: 0});
   }
 
-  /*<DepartmentItem key={department.id} department={department} toggleElement={this.toggleElement} editMode={this.state.editMode}/>*/
   render() {
     let departments = this.props.departments.length && this.props.departments.map((department, index) => {
         let departmentItemName;
         if (this.state.editMode !== department.id) {
           departmentItemName = (
-            <div className="department-item-name"
-                 onClick={e => this.toggleElement(department)}
-                 key={index}>
+            <div className="department-item-name">
+              <a href
+                title="Click for edit this text"
+                onClick={e => { e.preventDefault(); this.toggleElement(department)}} key={index}>
               {department.name}
+              </a>
             </div>)
         } else {
           departmentItemName = (

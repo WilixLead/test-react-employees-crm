@@ -6,15 +6,7 @@ import Employee from '../components/employee/employee';
 import Department from '../components/department/department';
 
 class App extends Component {
-
-  componentDidMount() {
-    console.log('department', this.props.department);
-    console.log('employees', this.props.employees);
-  }
-
-
   render() {
-   /* const { name, surname, age } = this.props.user*/
     return (
         <Row>
           <Col xs='2'>

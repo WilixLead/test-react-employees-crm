@@ -11,12 +11,10 @@ export function addDepartment(departmentName) {
       data : JSON.stringify(data),
       url: 'http://localhost:3000/departments/'
     }).then(data => {
-       console.log("data", data);
       $.ajax({
         method: 'GET',
         url: 'http://localhost:3000/departments/'
       }).then(data => {
-        console.log("data", data);
         return dispatch({
           type: GET_DEPARTMENT,
           payload:  data
@@ -28,7 +26,6 @@ export function addDepartment(departmentName) {
       console.error(err);
     })
   }
-
 }
 
 export function getDepartment(){
@@ -37,7 +34,6 @@ export function getDepartment(){
       method: 'GET',
       url: 'http://localhost:3000/departments/'
     }).then(data => {
-      console.log("data", data);
       return dispatch({
         type: GET_DEPARTMENT,
         payload:  data
@@ -82,12 +78,10 @@ export function updateDepartment(departmentId, departmentName) {
       data : JSON.stringify(data),
       url: 'http://localhost:3000/departments/' + departmentId
     }).then(data => {
-      console.log("data", data);
       $.ajax({
         method: 'GET',
         url: 'http://localhost:3000/departments/'
       }).then(data => {
-        console.log("data", data);
         return dispatch({
           type: GET_DEPARTMENT,
           payload:  data
@@ -99,5 +93,4 @@ export function updateDepartment(departmentId, departmentName) {
       console.error(err);
     })
   }
-
 }

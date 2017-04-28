@@ -1,7 +1,6 @@
 import $ from 'jquery';
 import {GET_EMPLOYEES} from "../constants/employee";
 
-
 export function addEmployee(firstName, lastName, department) {
   return dispatch => {
     let data = {
@@ -16,12 +15,10 @@ export function addEmployee(firstName, lastName, department) {
       data : JSON.stringify(data),
       url: 'http://localhost:3000/employees/'
     }).then(data => {
-      console.log("data", data);
       $.ajax({
         method: 'GET',
         url: 'http://localhost:3000/employees/'
       }).then(data => {
-        console.log("data", data);
         return dispatch({
           type: GET_EMPLOYEES,
           payload:  data
@@ -33,9 +30,7 @@ export function addEmployee(firstName, lastName, department) {
       console.error(err);
     })
   }
-
 }
-
 
 export function getEmployees(){
   return dispatch => {
@@ -90,12 +85,10 @@ export function updateEmployee(employeeId, firstName, lastName, department) {
       data : JSON.stringify(data),
       url: 'http://localhost:3000/employees/' + employeeId
     }).then(data => {
-      console.log("data", data);
       $.ajax({
         method: 'GET',
         url: 'http://localhost:3000/employees/'
       }).then(data => {
-        console.log("data", data);
         return dispatch({
           type: GET_EMPLOYEES,
           payload:  data
@@ -107,5 +100,4 @@ export function updateEmployee(employeeId, firstName, lastName, department) {
       console.error(err);
     })
   }
-
 }

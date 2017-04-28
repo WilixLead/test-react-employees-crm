@@ -6,9 +6,7 @@ export default function Department(state = initialState, action) {
   switch (action.type) {
     case GET_DEPARTMENT:
      return action.payload;
-
     default:
       return state;
   }
-
 }

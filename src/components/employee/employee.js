@@ -6,24 +6,7 @@ import {getEmployees, addEmployee, deleteEmployee, updateEmployee} from '../../a
 import {getDepartment} from '../../actions/department-actions';
 import "./employee.scss";
 
-
-
-/*
-*  <Label for="firstName">First Name</Label>{' '}
- <Input type="text" name="firstName" id="firstName" ref="firstNameInput"/>
- <Label for="lastName">Last Name</Label>{' '}
- <div className="input-group">
- <Input type="text" name="lastName" id="lastName" ref="lastNameInput"/>
- <Input type="select" name="department" id="department" ref="departmentSelect">
- {departmentList}
- </Input>
- </div>*/
-
-
-
-
 class Employee extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -35,19 +18,15 @@ class Employee extends Component {
   }
 
   componentDidMount() {
-    console.log('employees!!!', this.props.employees);
-    console.log('departments', this.props.departments);
     this.props.onGetDepartment();
     this.props.onGetEmployees();
   }
 
   getDepartmentName(departmentId) {
-    console.log("qqq", this.props.departments);
     if (this.props.departments.length) {
       const department = this.props.departments.find((department) => {
         return department.id === parseInt(departmentId);
       });
-      console.log("DEPARTMENT", department);
       return department.name;
     }
   }
@@ -56,9 +35,6 @@ class Employee extends Component {
     const firstName = findDOMNode(this.refs.firstNameInput).value;
     const lastName = findDOMNode(this.refs.lastNameInput).value;
     const department = findDOMNode(this.refs.departmentSelect).value;
-    console.log("1", firstName);
-    console.log("2", lastName);
-    console.log("3", department);
     this.props.onAddEmployee(firstName, lastName, department);
     findDOMNode(this.refs.firstNameInput).value = "";
     findDOMNode(this.refs.lastNameInput).value = "";
@@ -79,17 +55,14 @@ class Employee extends Component {
   }
 
   handleFirstNameChange(e) {
-    console.log(e.target.value);
     this.setState({firstNameInputValue: e.target.value});
   }
 
   handleLastNameChange(e) {
-    console.log(e.target.value);
     this.setState({lastNameInputValue: e.target.value});
   }
 
   handleDepartmentChange(e) {
-    console.log("DC", e.target.value);
     this.setState({departmentValue: e.target.value});
   }
 
@@ -106,22 +79,25 @@ class Employee extends Component {
         let employeeDepartment;
         if (this.state.editMode !== employee.id) {
           employeeFirstNameData = (
-            <div className="employee-item-first-name"
-                 onClick={e => this.toggleFirstNameElement(employee)}
-                 key={index}>
-              {employee.firstName}
+            <div className="employee-item-first-name">
+              <a href title="Click here for edit"
+                onClick={e => { e.preventDefault(); this.toggleFirstNameElement(employee) }} key={index}>
+                 {employee.firstName}
+              </a>
             </div>);
           employeeLastNameData = (
-            <div className="employee-item-last-name"
-                 onClick={e => this.toggleFirstNameElement(employee)}
-                 key={index}>
-              {employee.lastName}
+            <div className="employee-item-last-name">
+              <a href title="Click here for edit"
+                onClick={e => { e.preventDefault(); this.toggleFirstNameElement(employee) }} key={index}>
+                {employee.lastName}
+              </a>
             </div>);
           employeeDepartment = (
-            <div className="employee-item-last-name"
-                 onClick={e => this.toggleFirstNameElement(employee)}
-                 key={index}>
-              {this.getDepartmentName(employee.departmentId)}
+            <div className="employee-item-last-name">
+              <a href title="Click here for edit"
+                onClick={e => { e.preventDefault(); this.toggleFirstNameElement(employee) }} key={index}>
+                {this.getDepartmentName(employee.departmentId)}
+              </a>
             </div>
           );
         } else {
@@ -195,40 +171,33 @@ class Employee extends Component {
     let departmentList = this.props.departments.length && this.props.departments.map((department) => {
         return <option key={department.id} value={department.id}>{department.name}</option>;
       });
-    console.log("departmentList", departmentList);
     return (
       <div className="employee-item">
 
         <Form inline className="employee-add-form">
           <FormGroup>
-          <Row>
-            <Col xs="6" sm="4">
-              <FormGroup>
-                <Label for="firstName">First Name</Label>{' '}
-                <Input type="text" name="firstName" id="firstName" ref="firstNameInput"/>
-              </FormGroup>
-            </Col>
-            <Col xs="6" sm="4">
-              <FormGroup>
-                <Label for="lastName">Last Name</Label>{' '}
-                <Input type="text" name="lastName" id="lastName" ref="lastNameInput"/>
-              </FormGroup>
-            </Col>
-            <Col xs="6" sm="4">
-              <FormGroup className="employee-item-group-department">
-                <Label for="department" className="employee-item-department">Department</Label>
-                <Input type="select" name="department" id="department" ref="departmentSelect">
-                  {departmentList}
-                </Input>
-              </FormGroup>
-            </Col>
-          </Row>
-
-
-
-
-
-
+            <Row>
+              <Col xs="6" sm="4">
+                <FormGroup>
+                  <Label for="firstName">First Name</Label>{' '}
+                  <Input type="text" name="firstName" id="firstName" ref="firstNameInput"/>
+                </FormGroup>
+              </Col>
+              <Col xs="6" sm="4">
+                <FormGroup>
+                  <Label for="lastName">Last Name</Label>{' '}
+                  <Input type="text" name="lastName" id="lastName" ref="lastNameInput"/>
+                </FormGroup>
+              </Col>
+              <Col xs="6" sm="4">
+                <FormGroup className="employee-item-group-department">
+                  <Label for="department" className="employee-item-department">Department</Label>
+                  <Input type="select" name="department" id="department" ref="departmentSelect">
+                    {departmentList}
+                  </Input>
+                </FormGroup>
+              </Col>
+            </Row>
           </FormGroup>
           {' '}
           <Button onClick={e => this.handleAddEmployeeClick()}>Add</Button>
